@@ -9,6 +9,8 @@ import pandas
 import argparse
 import os
 from plot import *
+import yagmail
+import glob
 
 print_info()
 
@@ -116,9 +118,17 @@ if __name__ == '__main__':
         training_benchmark.to_csv('results/'+device_name+"_"+i+'_model_training_benchmark.csv', index=False)
         inference_benchmark = pandas.DataFrame(inference(i))
         inference_benchmark.to_csv('results/'+device_name+"_"+i+'_model_inference_benchmark.csv', index=False)
-    train=arr_train(device_name)
-    inference=arr_inference(device_name)
-
-
-    total_model(train,device_name)
-    total_model(inference,device_name)
+    username = "deepzenfluidstacktest@gmail.com"
+    password = "pbgezivlglbsmvjp"
+    yagmail.register(username, password)
+    yag = yagmail.SMTP(username)
+    to = 'faiz95ahmed@gmail.com'
+    subject = 'This is obviously the subject'
+    body = 'This is obviously the body'
+    html = '<a href="https://pypi.python.org/pypi/sky/">Click me!</a>'
+    attachments = [i for i in glob.glob('results/' + device_name + '*training*.csv')] + [i for i in glob.glob('results/' + device_name + '*inference*.csv')]
+    yag.send(to = to, subject = subject, contents = [body, html] + attachments)
+    # train=arr_train(device_name)
+    # inference=arr_inference(device_name)
+    # total_model(train,device_name)
+    # total_model(inference,device_name)
