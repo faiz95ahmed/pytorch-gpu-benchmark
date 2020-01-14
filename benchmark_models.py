@@ -123,9 +123,8 @@ if __name__ == '__main__':
     yagmail.register(username, password)
     yag = yagmail.SMTP(username)
     to = 'faiz95ahmed@gmail.com'
-    subject = 'This is obviously the subject'
-    body = 'This is obviously the body'
-    html = '<a href="https://pypi.python.org/pypi/sky/">Click me!</a>'
+    subject = 'Performance Report for '+ device_name
+    body = 'Performance Report for '+ device_name
     attachments = [i for i in glob.glob('results/' + device_name + '*training*.csv')] + [i for i in glob.glob('results/' + device_name + '*inference*.csv')]
     yag.send(to = to, subject = subject, contents = [body, html] + attachments)
     # train=arr_train(device_name)
