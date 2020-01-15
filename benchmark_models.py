@@ -8,7 +8,6 @@ import time
 import pandas
 import argparse
 import os
-from plot import *
 import yagmail
 import glob
 
