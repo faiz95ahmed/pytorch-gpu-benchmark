@@ -128,7 +128,7 @@ if __name__ == '__main__':
     subject = 'Performance Report for '+ device_name
     body = 'Performance Report for '+ device_name
     attachments = [i for i in glob.glob('results/' + device_name + '*training*.csv')] + [i for i in glob.glob('results/' + device_name + '*inference*.csv')]
-    yag.send(to = to, subject = subject, contents = [body, html] + attachments)
+    yag.send(to = to, subject = subject, contents = [body] + attachments)
     # train=arr_train(device_name)
     # inference=arr_inference(device_name)
     # total_model(train,device_name)
