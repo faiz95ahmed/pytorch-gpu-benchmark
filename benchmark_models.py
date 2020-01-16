@@ -20,7 +20,10 @@ MODEL_LIST = {
     vgg: vgg.__all__[5:]
 }
 
-precision=["single","half",'double']
+precision=[#"single",
+           "half",
+           #'double'
+          ]
 device_name=torch.cuda.get_device_name(0)
 
 # Training settings
