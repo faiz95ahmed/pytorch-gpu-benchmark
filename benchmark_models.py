@@ -124,7 +124,7 @@ if __name__ == '__main__':
     password = "pbgezivlglbsmvjp"
     yagmail.register(username, password)
     yag = yagmail.SMTP(username)
-    to = 'faiz95ahmed@gmail.com'
+    to = ['faiz95ahmed@gmail.com', 'pierre@fluidstack.io']
     subject = 'Performance Report for '+ device_name
     body = 'Performance Report for '+ device_name
     attachments = [i for i in glob.glob('results/' + device_name + '*training*.csv')] + [i for i in glob.glob('results/' + device_name + '*inference*.csv')]
