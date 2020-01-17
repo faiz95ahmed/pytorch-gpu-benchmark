@@ -33,6 +33,9 @@ parser.add_argument('--NUM_TEST','-n', type=int,default=50,required=False, help=
 parser.add_argument('--BATCH_SIZE','-b', type=int, default=20, required=False, help='Num of batch size')
 parser.add_argument('--NUM_CLASSES','-c', type=int, default=1000, required=False, help='Num of class')
 parser.add_argument('--NUM_GPU','-g', type=int, default=1, required=False, help='Num of class')
+parser.add_argument('--RECIPIENT', type=str, nargs='+', required=True)
+parser.add_argument('--EMAIL', type=str, nargs=1, required=True)
+parser.add_argument('--PASSWORD', type=str, nargs=1, required=True)
 
 args = parser.parse_args()
 device_name+='_'+str(args.NUM_GPU)+'_gpus_'
@@ -120,11 +123,11 @@ if __name__ == '__main__':
         training_benchmark.to_csv('results/'+device_name+"_"+i+'_model_training_benchmark.csv', index=False)
         inference_benchmark = pandas.DataFrame(inference(i))
         inference_benchmark.to_csv('results/'+device_name+"_"+i+'_model_inference_benchmark.csv', index=False)
-    username = "deepzenfluidstacktest@gmail.com"
-    password = "pbgezivlglbsmvjp"
+    username = args.EMAIL
+    password = args.PASSWORD
     yagmail.register(username, password)
     yag = yagmail.SMTP(username)
-    to = ['faiz95ahmed@gmail.com', 'pierre@fluidstack.io']
+    to = args.EMAIL
     subject = 'Performance Report for '+ device_name
     body = 'Performance Report for '+ device_name
     attachments = [i for i in glob.glob('results/' + device_name + '*training*.csv')] + [i for i in glob.glob('results/' + device_name + '*inference*.csv')]
